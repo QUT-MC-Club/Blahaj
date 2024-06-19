@@ -59,6 +59,7 @@ public class BlahajBlocks {
 
 			PRIDE_BLOCKS.add(block);
 			PRIDE_ITEMS.add(item);
+
 		}
 
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {

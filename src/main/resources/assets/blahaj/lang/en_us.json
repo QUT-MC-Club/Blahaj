@@ -33,5 +33,8 @@
   "block.blahaj.trans_shark": "Trans Toy Shark",
 
   "tooltip.blahaj.owner.craft": "Crafted by %s",
-  "tooltip.blahaj.owner.rename": "%s of %s"
+  "tooltip.blahaj.owner.rename": "%s of %s",
+
+  "tag.item.blahaj.plushies": "Plushies",
+  "tag.item.blahaj.sharks": "Shark Plushies"
 }
