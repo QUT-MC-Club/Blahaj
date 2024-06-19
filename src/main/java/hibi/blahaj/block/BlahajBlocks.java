@@ -12,10 +12,10 @@ import static hibi.blahaj.Blahaj.*;
 
 public class BlahajBlocks {
 
-	public static final Identifier GRAY_SHARK_ID = new Identifier(MOD_ID, "gray_shark");
-	public static final Identifier BLAHAJ_ID = new Identifier(MOD_ID, "blue_shark");
-	public static final Identifier BLAVINGAD_ID = new Identifier(MOD_ID, "blue_whale");
-	public static final Identifier BREAD_ID = new Identifier(MOD_ID, "bread");
+	public static final Identifier GRAY_SHARK_ID = Identifier.of(MOD_ID, "gray_shark");
+	public static final Identifier BLAHAJ_ID = Identifier.of(MOD_ID, "blue_shark");
+	public static final Identifier BLAVINGAD_ID = Identifier.of(MOD_ID, "blue_whale");
+	public static final Identifier BREAD_ID = Identifier.of(MOD_ID, "bread");
 
 	public static Block GRAY_SHARK_BLOCK;
 	public static Item GRAY_SHARK_ITEM;
