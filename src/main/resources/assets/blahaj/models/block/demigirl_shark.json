@@ -1,0 +1,6 @@
+{
+  "parent": "blahaj:block/blue_shark",
+  "textures": {
+    "0": "blahaj:block/pride_sharks/demigirl"
+  }
+}

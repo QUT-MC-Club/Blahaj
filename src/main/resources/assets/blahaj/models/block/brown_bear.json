@@ -5,8 +5,8 @@
     64
   ],
   "textures": {
-    "0": "blahaj:item/brown_bear",
-    "particle": "blahaj:item/brown_bear"
+    "0": "blahaj:block/brown_bear",
+    "particle": "blahaj:block/brown_bear"
   },
   "elements": [
     {
