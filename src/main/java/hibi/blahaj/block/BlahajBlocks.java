@@ -16,6 +16,7 @@ public class BlahajBlocks {
 	public static final Identifier BLAHAJ_ID = Identifier.of(MOD_ID, "blue_shark");
 	public static final Identifier BLAVINGAD_ID = Identifier.of(MOD_ID, "blue_whale");
 	public static final Identifier BREAD_ID = Identifier.of(MOD_ID, "bread");
+	public static final Identifier BROWN_BEAR_ID = Identifier.of(MOD_ID, "brown_bear");
 
 	public static Block GRAY_SHARK_BLOCK;
 	public static Item GRAY_SHARK_ITEM;
@@ -25,23 +26,28 @@ public class BlahajBlocks {
 	public static Item BLAVINGAD_ITEM;
 	public static Block BREAD_BLOCK;
 	public static Item BREAD_ITEM;
+	public static Block BROWN_BEAR_BLOCK;
+	public static Item BROWN_BEAR_ITEM;
 
 	public static void register() {
 		GRAY_SHARK_BLOCK = Registry.register(Registries.BLOCK, GRAY_SHARK_ID, new CuddlyBlock(AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_WOOL)));
 		BLAHAJ_BLOCK = Registry.register(Registries.BLOCK, BLAHAJ_ID, new CuddlyBlock(AbstractBlock.Settings.copy(Blocks.CYAN_WOOL)));
 		BLAVINGAD_BLOCK = Registry.register(Registries.BLOCK, BLAVINGAD_ID, new CuddlyBlock(AbstractBlock.Settings.copy(Blocks.BLUE_WOOL)));
 		BREAD_BLOCK = Registry.register(Registries.BLOCK, BREAD_ID, new CuddlyBlock(AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL)));
+		BROWN_BEAR_BLOCK = Registry.register(Registries.BLOCK, BROWN_BEAR_ID, new CuddlyBlock(AbstractBlock.Settings.copy(Blocks.BROWN_WOOL)));
 
 		GRAY_SHARK_ITEM = Registry.register(Registries.ITEM, GRAY_SHARK_ID, new CuddlyItem(GRAY_SHARK_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()), "block.blahaj.gray_shark.tooltip"));
 		BLAHAJ_ITEM = Registry.register(Registries.ITEM, BLAHAJ_ID, new CuddlyItem(BLAHAJ_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()), "block.blahaj.blue_shark.tooltip"));
 		BLAVINGAD_ITEM = Registry.register(Registries.ITEM, BLAVINGAD_ID, new CuddlyItem(BLAVINGAD_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()), "block.blahaj.blue_whale.tooltip"));
 		BREAD_ITEM = Registry.register(Registries.ITEM, BREAD_ID, new CuddlyItem(BREAD_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()), null));
+		BROWN_BEAR_ITEM = Registry.register(Registries.ITEM, BROWN_BEAR_ID, new CuddlyItem(BROWN_BEAR_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()), "block.blahaj.brown_bear.tooltip"));
 
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
 			entries.add(new ItemStack(GRAY_SHARK_ITEM));
 			entries.add(new ItemStack(BLAHAJ_ITEM));
 			entries.add(new ItemStack(BLAVINGAD_ITEM));
 			entries.add(new ItemStack(BREAD_ITEM));
+			entries.add(new ItemStack(BROWN_BEAR_ITEM));
 		});
 	}
 
