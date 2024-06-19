@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.object.builder.v1.trade.*;
 import net.minecraft.item.*;
 import net.minecraft.loot.*;
 import net.minecraft.loot.entry.*;
-import net.minecraft.registry.*;
 import net.minecraft.village.*;
 
 public class Blahaj implements ModInitializer {
@@ -37,6 +36,14 @@ public class Blahaj implements ModInitializer {
 				LootPool.Builder pb = LootPool.builder()
 					.with(ItemEntry.builder(BlahajBlocks.GRAY_SHARK_ITEM).weight(5))
 					.with(ItemEntry.builder(Items.AIR).weight(54));
+				tableBuilder.pool(pb);
+			} else if (key.equals(LootTables.HERO_OF_THE_VILLAGE_FLETCHER_GIFT_GAMEPLAY)
+				|| key.equals(LootTables.HERO_OF_THE_VILLAGE_BUTCHER_GIFT_GAMEPLAY)
+				|| key.equals(LootTables.HERO_OF_THE_VILLAGE_LEATHERWORKER_GIFT_GAMEPLAY)) {
+
+				LootPool.Builder pb = LootPool.builder()
+					.with(ItemEntry.builder(BlahajBlocks.BROWN_BEAR_ITEM).weight(5))
+					.with(ItemEntry.builder(Items.AIR).weight(25));
 				tableBuilder.pool(pb);
 			}
 		});
