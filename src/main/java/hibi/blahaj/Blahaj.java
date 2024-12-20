@@ -1,8 +1,10 @@
 package hibi.blahaj;
 
 import hibi.blahaj.block.*;
+import hibi.blahaj.sound.ModSoundEvents;
 import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.loot.v3.*;
+import net.fabricmc.fabric.api.loot.v2.*;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.*;
 import net.minecraft.item.*;
 import net.minecraft.loot.*;
@@ -10,12 +12,14 @@ import net.minecraft.loot.entry.*;
 import net.minecraft.village.*;
 
 public class Blahaj implements ModInitializer {
+	// In the lang Ttapwdtmrds stands for: "The things are plushies why do they make rubber ducky sounds"
 
 	public static final String MOD_ID = "blahaj";
 
 	public void onInitialize() {
 		BlahajDataComponentTypes.register();
 		BlahajBlocks.register();
+		ModSoundEvents.init();
 		registerLootTables();
 		registerTrades();
 	}
