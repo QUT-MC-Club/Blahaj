@@ -1,27 +1,33 @@
 package hibi.blahaj;
 
 import hibi.blahaj.block.*;
+import hibi.blahaj.sound.ModSoundEvents;
 import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.loot.v2.*;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.*;
 import net.minecraft.item.*;
 import net.minecraft.loot.*;
 import net.minecraft.loot.entry.*;
 import net.minecraft.village.*;
 
+import java.util.Random;
+
 public class Blahaj implements ModInitializer {
+	// In the lang Ttapwdtmrds stands for: "The things are plushies why do they make rubber ducky sounds"
 
 	public static final String MOD_ID = "blahaj";
+	public static final Random RANDOM = new Random();
 
 	public void onInitialize() {
 		BlahajDataComponentTypes.register();
 		BlahajBlocks.register();
+		ModSoundEvents.init();
 		registerLootTables();
 		registerTrades();
 	}
 
 	private static void registerLootTables() {
-		LootTableEvents.MODIFY.register((key, tableBuilder, source) -> {
+		LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
 			if (key.equals(LootTables.STRONGHOLD_CROSSING_CHEST) || key.equals(LootTables.STRONGHOLD_CORRIDOR_CHEST)) {
 				LootPool.Builder pb = LootPool.builder()
 					.with(ItemEntry.builder(BlahajBlocks.GRAY_SHARK_ITEM).weight(5))

@@ -1,9 +1,12 @@
 package hibi.blahaj.block;
 
 import net.fabricmc.fabric.api.blockrenderlayer.v1.*;
+import net.fabricmc.fabric.api.item.v1.EquipmentSlotProvider;
 import net.fabricmc.fabric.api.itemgroup.v1.*;
 import net.minecraft.block.*;
 import net.minecraft.client.render.*;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.*;
 import net.minecraft.registry.*;
 import net.minecraft.util.*;
@@ -46,16 +49,16 @@ public class BlahajBlocks {
 		BREAD_BLOCK = Registry.register(Registries.BLOCK, BREAD_ID, new CuddlyBlock(AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL)));
 		BROWN_BEAR_BLOCK = Registry.register(Registries.BLOCK, BROWN_BEAR_ID, new CuddlyBlock(AbstractBlock.Settings.copy(Blocks.BROWN_WOOL)));
 
-		GRAY_SHARK_ITEM = Registry.register(Registries.ITEM, GRAY_SHARK_ID, new CuddlyItem(GRAY_SHARK_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()), "block.blahaj.gray_shark.tooltip"));
-		BLAHAJ_ITEM = Registry.register(Registries.ITEM, BLAHAJ_ID, new CuddlyItem(BLAHAJ_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()), "block.blahaj.blue_shark.tooltip"));
-		BLAVINGAD_ITEM = Registry.register(Registries.ITEM, BLAVINGAD_ID, new CuddlyItem(BLAVINGAD_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()), "block.blahaj.blue_whale.tooltip"));
-		BREAD_ITEM = Registry.register(Registries.ITEM, BREAD_ID, new CuddlyItem(BREAD_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()), null));
-		BROWN_BEAR_ITEM = Registry.register(Registries.ITEM, BROWN_BEAR_ID, new CuddlyItem(BROWN_BEAR_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()), "block.blahaj.brown_bear.tooltip"));
+		GRAY_SHARK_ITEM = Registry.register(Registries.ITEM, GRAY_SHARK_ID, new CuddlyItem(GRAY_SHARK_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()).equipmentSlot((entity, stack) -> EquipmentSlot.HEAD), "block.blahaj.gray_shark.tooltip"));
+		BLAHAJ_ITEM = Registry.register(Registries.ITEM, BLAHAJ_ID, new CuddlyItem(BLAHAJ_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()).equipmentSlot((entity, stack) -> EquipmentSlot.HEAD), "block.blahaj.blue_shark.tooltip"));
+		BLAVINGAD_ITEM = Registry.register(Registries.ITEM, BLAVINGAD_ID, new CuddlyItem(BLAVINGAD_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()).equipmentSlot((entity, stack) -> EquipmentSlot.HEAD), "block.blahaj.blue_whale.tooltip"));
+		BREAD_ITEM = Registry.register(Registries.ITEM, BREAD_ID, new CuddlyItem(BREAD_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()).equipmentSlot((entity, stack) -> EquipmentSlot.HEAD), null));
+		BROWN_BEAR_ITEM = Registry.register(Registries.ITEM, BROWN_BEAR_ID, new CuddlyItem(BROWN_BEAR_BLOCK, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()).equipmentSlot((entity, stack) -> EquipmentSlot.HEAD), "block.blahaj.brown_bear.tooltip"));
 
 		for (String name : PRIDE_NAMES) {
 			Identifier id = Identifier.of(MOD_ID, name + "_shark");
 			Block block = Registry.register(Registries.BLOCK, id, new CuddlyBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL)));
-			Item item = Registry.register(Registries.ITEM, id, new CuddlyItem(block, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()), "block.blahaj.blue_shark.tooltip"));
+			Item item = Registry.register(Registries.ITEM, id, new CuddlyItem(block, new Item.Settings().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()).equipmentSlot((entity, stack) -> EquipmentSlot.HEAD), "block.blahaj.blue_shark.tooltip"));
 
 			PRIDE_BLOCKS.add(block);
 			PRIDE_ITEMS.add(item);
