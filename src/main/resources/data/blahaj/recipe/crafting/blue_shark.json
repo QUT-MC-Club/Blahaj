@@ -6,15 +6,9 @@
     "PW "
   ],
   "key": {
-    "#": {
-      "item": "minecraft:light_blue_wool"
-    },
-    "P": {
-      "item": "minecraft:pink_dye"
-    },
-    "W": {
-      "item": "minecraft:white_wool"
-    }
+    "#": "minecraft:light_blue_wool",
+    "P": "minecraft:pink_dye",
+    "W": "minecraft:white_wool"
   },
   "result": {
     "id": "blahaj:blue_shark",

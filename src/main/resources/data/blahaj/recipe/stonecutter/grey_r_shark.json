@@ -1,12 +1,9 @@
 {
   "type": "minecraft:stonecutting",
-  "category": "misc",
   "group": "plush_sharks",
-  "ingredient": {
-    "tag": "blahaj:sharks"
-  },
+  "ingredient": "#blahaj:sharks",
   "result": {
-    "id": "blahaj:grey_r_shark"
-  },
-  "count": 1
+    "id": "blahaj:grey_r_shark",
+    "count": 1
+  }
 }

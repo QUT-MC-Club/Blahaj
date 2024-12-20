@@ -6,15 +6,9 @@
     "GW "
   ],
   "key": {
-    "#": {
-      "item": "minecraft:blue_wool"
-    },
-    "G": {
-      "item": "minecraft:light_gray_wool"
-    },
-    "W": {
-      "item": "minecraft:white_wool"
-    }
+    "#": "minecraft:blue_wool",
+    "G": "minecraft:light_gray_wool",
+    "W": "minecraft:white_wool"
   },
   "result": {
     "id": "blahaj:blue_whale",
