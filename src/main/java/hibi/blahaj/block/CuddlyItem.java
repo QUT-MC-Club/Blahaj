@@ -17,11 +17,11 @@ import java.util.*;
 
 public class CuddlyItem extends BlockItem {
 
-	private final Text subtitle;
+	private final Text tooltip;
 
-	public CuddlyItem(Block block, Settings settings, String subtitle) {
+	public CuddlyItem(Block block, Settings settings, String tooltip) {
 		super(block, settings);
-		this.subtitle = subtitle == null ? null : Text.translatable(subtitle).formatted(Formatting.GRAY);
+		this.tooltip = tooltip == null ? null : Text.translatable(tooltip).formatted(Formatting.GRAY);
 	}
 
 	@Override
@@ -37,8 +37,8 @@ public class CuddlyItem extends BlockItem {
 	public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
 		super.appendTooltip(stack, context, tooltip, type);
 
-		if (this.subtitle != null) {
-			tooltip.add(this.subtitle);
+		if (this.tooltip != null) {
+			tooltip.add(this.tooltip);
 		}
 
 		@Nullable Text ownerName = stack.get(BlahajDataComponentTypes.OWNER);
@@ -56,8 +56,8 @@ public class CuddlyItem extends BlockItem {
 
 	public static AttributeModifiersComponent createAttributeModifiers() {
 		return AttributeModifiersComponent.builder()
-			.add(EntityAttributes.PLAYER_BLOCK_BREAK_SPEED, new EntityAttributeModifier(MINING_SPEED_MODIFIER_ID, -3.0, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), AttributeModifierSlot.MAINHAND)
-			.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(BASE_ATTACK_DAMAGE_MODIFIER_ID, -2.0, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), AttributeModifierSlot.MAINHAND)
+			.add(EntityAttributes.BLOCK_BREAK_SPEED, new EntityAttributeModifier(MINING_SPEED_MODIFIER_ID, -3.0, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), AttributeModifierSlot.MAINHAND)
+			.add(EntityAttributes.ATTACK_DAMAGE, new EntityAttributeModifier(BASE_ATTACK_DAMAGE_MODIFIER_ID, -2.0, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), AttributeModifierSlot.MAINHAND)
 			.build();
 	}
 
