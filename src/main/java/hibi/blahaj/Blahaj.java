@@ -11,7 +11,6 @@ import net.minecraft.loot.entry.*;
 import net.minecraft.village.*;
 
 public class Blahaj implements ModInitializer {
-	// In the lang Ttapwdtmrds stands for: "The things are plushies why do they make rubber ducky sounds"
 
 	public static final String MOD_ID = "blahaj";
 
