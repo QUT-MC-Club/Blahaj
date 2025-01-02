@@ -1,21 +1,18 @@
 package hibi.blahaj.block;
 
 import com.mojang.serialization.*;
-import hibi.blahaj.sound.ModSoundEvents;
+import hibi.blahaj.sound.*;
 import net.minecraft.block.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
 import net.minecraft.item.*;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.*;
 import net.minecraft.state.*;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.*;
+import net.minecraft.util.hit.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.shape.*;
 import net.minecraft.world.*;
-import org.jetbrains.annotations.Nullable;
 
 public class CuddlyBlock extends HorizontalFacingBlock {
 
@@ -47,15 +44,14 @@ public class CuddlyBlock extends HorizontalFacingBlock {
 
 	@Override
 	protected void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
-		world.playSound(null, hit.getBlockPos(), ModSoundEvents.BLOCK_CUDDLY_ITEM_HIT, SoundCategory.BLOCKS, 0.5f, 1);
-
+		world.playSound(null, hit.getBlockPos(), BlahajSoundEvents.BLOCK_CUDDLY_ITEM_HIT, SoundCategory.BLOCKS, 0.5f, 1);
 		super.onProjectileHit(world, state, hit, projectile);
 	}
 
 	@Override
 	protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-		world.playSound(null, pos, ModSoundEvents.getRandomSqueak(), SoundCategory.BLOCKS, 0.5f, 1);
-
-		return ActionResult.PASS;
+		world.playSound(null, pos, BlahajSoundEvents.getRandomSqueak(world.getRandom()), SoundCategory.BLOCKS, 0.5f, 1);
+		return ActionResult.SUCCESS;
 	}
+
 }

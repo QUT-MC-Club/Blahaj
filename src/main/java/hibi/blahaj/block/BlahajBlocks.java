@@ -1,12 +1,10 @@
 package hibi.blahaj.block;
 
 import net.fabricmc.fabric.api.blockrenderlayer.v1.*;
-import net.fabricmc.fabric.api.item.v1.EquipmentSlotProvider;
 import net.fabricmc.fabric.api.itemgroup.v1.*;
 import net.minecraft.block.*;
 import net.minecraft.client.render.*;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.item.*;
 import net.minecraft.registry.*;
 import net.minecraft.util.*;
@@ -60,7 +58,7 @@ public class BlahajBlocks {
 		RegistryKey<Block> blockKey = RegistryKey.of(RegistryKeys.BLOCK, id);
 		RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, id);
 		Block block = Registry.register(Registries.BLOCK, id, new CuddlyBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).registryKey(blockKey)));
-		Item item = Registry.register(Registries.ITEM, id, new CuddlyItem(block, new Item.Settings().registryKey(itemKey).useBlockPrefixedTranslationKey().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()), tooltip).equipmentSlot((entity, stack) -> EquipmentSlot.HEAD));
+		Item item = Registry.register(Registries.ITEM, id, new CuddlyItem(block, new Item.Settings().registryKey(itemKey).useBlockPrefixedTranslationKey().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()).equipmentSlot((entity, stack) -> EquipmentSlot.HEAD), tooltip));
 
 		BLOCKS.add(block);
 		ITEMS.add(item);
