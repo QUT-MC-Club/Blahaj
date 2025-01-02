@@ -1,9 +1,15 @@
 package hibi.blahaj.block;
 
 import com.mojang.serialization.*;
+import hibi.blahaj.sound.*;
 import net.minecraft.block.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
 import net.minecraft.item.*;
+import net.minecraft.sound.*;
 import net.minecraft.state.*;
+import net.minecraft.util.*;
+import net.minecraft.util.hit.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.shape.*;
 import net.minecraft.world.*;
@@ -32,9 +38,20 @@ public class CuddlyBlock extends HorizontalFacingBlock {
 		return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
 	}
 
-
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
+	}
+
+	@Override
+	protected void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+		world.playSound(null, hit.getBlockPos(), BlahajSoundEvents.BLOCK_CUDDLY_ITEM_HIT, SoundCategory.BLOCKS, 0.5f, 1);
+		super.onProjectileHit(world, state, hit, projectile);
+	}
+
+	@Override
+	protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+		world.playSound(null, pos, BlahajSoundEvents.getRandomSqueak(world.getRandom()), SoundCategory.BLOCKS, 0.5f, 1);
+		return ActionResult.SUCCESS;
 	}
 
 }
