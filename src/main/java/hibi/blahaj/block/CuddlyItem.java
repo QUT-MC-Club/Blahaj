@@ -15,7 +15,7 @@ import net.minecraft.text.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 import xyz.nucleoid.packettweaker.PacketContext;
-
+import eu.pb4.polymer.core.api.block.PolymerBlock;
 import org.jetbrains.annotations.*;
 
 import java.util.*;
@@ -24,7 +24,7 @@ public class CuddlyItem extends FactoryBlockItem {
 
 	private final Text tooltip;
 
-	public CuddlyItem(Block block, Settings settings, String tooltip) {
+	public <T extends Block & PolymerBlock> CuddlyItem(T block, Settings settings, String tooltip) {
 		super(block, settings);
 		this.tooltip = tooltip == null ? null : Text.translatable(tooltip).formatted(Formatting.GRAY);
 		
