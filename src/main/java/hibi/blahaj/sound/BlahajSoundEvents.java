@@ -18,8 +18,8 @@ public class BlahajSoundEvents {
     }
 
     private static SoundEvent register(String id) {
-        return Registry.register(Registries.SOUND_EVENT, id(id), SoundEvent.of(id(id)));
-    }
+        return SoundEvent.of(id(id));
+}
 
     public static void init() {
 		for (int i = 1; i < 6; i++) {
