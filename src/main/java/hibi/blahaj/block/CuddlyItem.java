@@ -36,7 +36,6 @@ public class CuddlyItem extends BlockItem implements PolymerItem {
 		if (player != null) { // compensate for auto-crafter mods
 			stack.set(BlahajDataComponentTypes.OWNER, player.getName());
 		}
-			// Register Polymer's item handler
 	}
 
 	@Override
@@ -47,7 +46,8 @@ public class CuddlyItem extends BlockItem implements PolymerItem {
 			tooltip.add(this.tooltip);
 		}
 
-		@Nullable Text ownerName = stack.get(BlahajDataComponentTypes.OWNER);
+		//@Nullable Text ownerName = stack.get(BlahajDataComponentTypes.OWNER);
+		Text ownerName = Text.of("Default");
 		if (ownerName != null) {
 			@Nullable Text customName = stack.get(DataComponentTypes.CUSTOM_NAME);
 			if (customName == null) {
@@ -69,7 +69,14 @@ public class CuddlyItem extends BlockItem implements PolymerItem {
 
 	@Override
 	public Item getPolymerItem(ItemStack itemStack, PacketContext context) {
-		return itemStack.getCount() > 32 ? Items.WHITE_WOOL : Items.BLACK_WOOL;
+		return Items.WHITE_WOOL;
+	}
+
+	@Override
+	public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, PacketContext context) {
+		ItemStack out = PolymerItemUtils.createItemStack(itemStack, tooltipType, context);
+		out.set(DataComponentTypes.ITEM_MODEL, Identifier.ofVanilla("cod"));
+		return out;
 	}
 
 }

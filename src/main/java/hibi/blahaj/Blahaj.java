@@ -1,7 +1,6 @@
 package hibi.blahaj;
 
 import hibi.blahaj.block.*;
-import hibi.blahaj.sound.*;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.loot.v3.*;
 import net.fabricmc.fabric.api.object.builder.v1.trade.*;
@@ -15,9 +14,8 @@ public class Blahaj implements ModInitializer {
 	public static final String MOD_ID = "blahaj";
 
 	public void onInitialize() {
-		BlahajDataComponentTypes.register();
+		//BlahajDataComponentTypes.register();
 		BlahajBlocks.register();
-		BlahajSoundEvents.init();
 		registerLootTables();
 		registerTrades();
 	}

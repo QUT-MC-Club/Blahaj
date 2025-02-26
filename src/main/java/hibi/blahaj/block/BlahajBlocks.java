@@ -6,6 +6,7 @@ import net.minecraft.block.*;
 import net.minecraft.client.render.*;
 import net.minecraft.entity.*;
 import net.minecraft.item.*;
+import net.minecraft.text.Text;
 import eu.pb4.polymer.core.api.item.*;
 import eu.pb4.polymer.core.api.block.*;
 import net.minecraft.nbt.NbtElement;
@@ -16,14 +17,9 @@ import java.util.*;
 
 import static hibi.blahaj.Blahaj.*;
 
-public class BlahajBlocks extends SimplePolymerBlock {
-
-	public BlahajBlocks(Settings settings, Block polymerBlock) {
-			super(settings, polymerBlock);
-			//TODO Auto-generated constructor stub
-		}
+public class BlahajBlocks {
 	
-		public static final Identifier GRAY_SHARK_ID = Identifier.of(MOD_ID, "gray_shark");
+	public static final Identifier GRAY_SHARK_ID = Identifier.of(MOD_ID, "gray_shark");
 	public static final Identifier BLAHAJ_ID = Identifier.of(MOD_ID, "blue_shark");
 	public static final Identifier BLAVINGAD_ID = Identifier.of(MOD_ID, "blue_whale");
 	public static final Identifier BREAD_ID = Identifier.of(MOD_ID, "bread");
@@ -43,7 +39,16 @@ public class BlahajBlocks extends SimplePolymerBlock {
 	public static List<Block> BLOCKS = new ArrayList<>();
 	public static List<Item> ITEMS = new ArrayList<>();
 
+	public static final ItemGroup ITEM_GROUP = PolymerItemGroupUtils.builder()
+            .displayName(Text.of("Blåhaj"))
+            .icon(Items.COD::getDefaultStack).entries((context, entries) -> {
+                for (Item item : ITEMS) {
+					entries.add(new ItemStack(item));
+				}
+            }).build();
+
 	public static void register() {
+
 		GRAY_SHARK_BLOCK = registerCuddlyBlockAndItem(GRAY_SHARK_ID, "block.blahaj.gray_shark.tooltip");
 		BLAHAJ_BLOCK = registerCuddlyBlockAndItem(BLAHAJ_ID, "block.blahaj.blue_shark.tooltip");
 		BLAVINGAD_BLOCK = registerCuddlyBlockAndItem(BLAVINGAD_ID, "block.blahaj.blue_whale.tooltip");
@@ -54,23 +59,11 @@ public class BlahajBlocks extends SimplePolymerBlock {
 			Identifier id = Identifier.of(MOD_ID, name + "_shark");
 			registerCuddlyBlockAndItem(id, "block.blahaj.blue_shark.tooltip");
 		}
-
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
-			for (Item item : ITEMS) {
-				ItemStack newItem = new ItemStack(item);
-				entries.add(newItem);
-			}
-		});
-		// Register item with Polymer
-		PolymerItemUtils.ITEM_CHECK.register(
-    	(itemStack) -> {
-        	return true;
-    	}
-	);
+		PolymerItemGroupUtils.registerPolymerItemGroup(Identifier.of(MOD_ID, "item_group"), ITEM_GROUP);
 	}
-	
 
 	public static Block registerCuddlyBlockAndItem(Identifier id, String tooltip) {
+		
 		RegistryKey<Block> blockKey = RegistryKey.of(RegistryKeys.BLOCK, id);
 		RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, id);
 		Block block = Registry.register(Registries.BLOCK, id, new CuddlyBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).registryKey(blockKey)));
@@ -78,14 +71,6 @@ public class BlahajBlocks extends SimplePolymerBlock {
 
 		BLOCKS.add(block);
 		ITEMS.add(item);
-
 		return block;
 	}
-
-	public static void registerClient() {
-		for (Block block : BLOCKS) {
-			BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
-		}
-	}
-
 }
