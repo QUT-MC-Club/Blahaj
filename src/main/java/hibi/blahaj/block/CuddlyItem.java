@@ -7,21 +7,26 @@ import net.minecraft.component.type.*;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
+import eu.pb4.polymer.core.api.item.*;
 import net.minecraft.item.tooltip.*;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
+import xyz.nucleoid.packettweaker.PacketContext;
+
 import org.jetbrains.annotations.*;
 
 import java.util.*;
 
-public class CuddlyItem extends BlockItem {
+public class CuddlyItem extends BlockItem implements PolymerItem {
 
 	private final Text tooltip;
 
 	public CuddlyItem(Block block, Settings settings, String tooltip) {
 		super(block, settings);
 		this.tooltip = tooltip == null ? null : Text.translatable(tooltip).formatted(Formatting.GRAY);
+		
 	}
 
 	@Override
@@ -31,6 +36,7 @@ public class CuddlyItem extends BlockItem {
 		if (player != null) { // compensate for auto-crafter mods
 			stack.set(BlahajDataComponentTypes.OWNER, player.getName());
 		}
+			// Register Polymer's item handler
 	}
 
 	@Override
@@ -61,5 +67,9 @@ public class CuddlyItem extends BlockItem {
 			.build();
 	}
 
+	@Override
+	public Item getPolymerItem(ItemStack itemStack, PacketContext context) {
+		return itemStack.getCount() > 32 ? Items.WHITE_WOOL : Items.BLACK_WOOL;
+	}
 
 }

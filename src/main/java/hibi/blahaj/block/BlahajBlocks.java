@@ -6,16 +6,24 @@ import net.minecraft.block.*;
 import net.minecraft.client.render.*;
 import net.minecraft.entity.*;
 import net.minecraft.item.*;
+import eu.pb4.polymer.core.api.item.*;
+import eu.pb4.polymer.core.api.block.*;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.registry.*;
 import net.minecraft.util.*;
-
+import xyz.nucleoid.packettweaker.PacketContext;
 import java.util.*;
 
 import static hibi.blahaj.Blahaj.*;
 
-public class BlahajBlocks {
+public class BlahajBlocks extends SimplePolymerBlock {
 
-	public static final Identifier GRAY_SHARK_ID = Identifier.of(MOD_ID, "gray_shark");
+	public BlahajBlocks(Settings settings, Block polymerBlock) {
+			super(settings, polymerBlock);
+			//TODO Auto-generated constructor stub
+		}
+	
+		public static final Identifier GRAY_SHARK_ID = Identifier.of(MOD_ID, "gray_shark");
 	public static final Identifier BLAHAJ_ID = Identifier.of(MOD_ID, "blue_shark");
 	public static final Identifier BLAVINGAD_ID = Identifier.of(MOD_ID, "blue_whale");
 	public static final Identifier BREAD_ID = Identifier.of(MOD_ID, "bread");
@@ -49,10 +57,18 @@ public class BlahajBlocks {
 
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
 			for (Item item : ITEMS) {
-				entries.add(new ItemStack(item));
+				ItemStack newItem = new ItemStack(item);
+				entries.add(newItem);
 			}
 		});
+		// Register item with Polymer
+		PolymerItemUtils.ITEM_CHECK.register(
+    	(itemStack) -> {
+        	return true;
+    	}
+	);
 	}
+	
 
 	public static Block registerCuddlyBlockAndItem(Identifier id, String tooltip) {
 		RegistryKey<Block> blockKey = RegistryKey.of(RegistryKeys.BLOCK, id);

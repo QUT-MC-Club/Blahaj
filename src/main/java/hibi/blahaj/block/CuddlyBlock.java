@@ -1,6 +1,8 @@
 package hibi.blahaj.block;
 
 import com.mojang.serialization.*;
+
+import eu.pb4.polymer.core.api.block.PolymerBlock;
 import hibi.blahaj.sound.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.*;
@@ -12,9 +14,11 @@ import net.minecraft.util.*;
 import net.minecraft.util.hit.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.shape.*;
+import eu.pb4.polymer.core.api.block.*;
 import net.minecraft.world.*;
+import xyz.nucleoid.packettweaker.PacketContext;
 
-public class CuddlyBlock extends HorizontalFacingBlock {
+public class CuddlyBlock extends HorizontalFacingBlock implements PolymerBlock {
 
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0);
 	public static final MapCodec<CuddlyBlock> CODEC = createCodec(CuddlyBlock::new);
@@ -52,6 +56,11 @@ public class CuddlyBlock extends HorizontalFacingBlock {
 	protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
 		world.playSound(null, pos, BlahajSoundEvents.getRandomSqueak(world.getRandom()), SoundCategory.BLOCKS, 0.5f, 1);
 		return ActionResult.SUCCESS;
+	}
+
+	@Override
+	public BlockState getPolymerBlockState(BlockState state, PacketContext context) {
+		return this.stateManager.getDefaultState().with(FACING, Direction.NORTH);
 	}
 
 }

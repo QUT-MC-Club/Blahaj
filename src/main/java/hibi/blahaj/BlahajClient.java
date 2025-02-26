@@ -7,7 +7,7 @@ public class BlahajClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		BlahajBlocks.registerClient();
+		//BlahajBlocks.registerClient();
 	}
 
 }
