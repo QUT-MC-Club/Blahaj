@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import eu.pb4.polymer.resourcepack.api.ResourcePackBuilder;
 import hibi.blahaj.block.*;
+import hibi.blahaj.sound.*;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.loot.v3.*;
 import net.fabricmc.fabric.api.object.builder.v1.trade.*;
@@ -33,12 +34,11 @@ public class Blahaj implements ModInitializer {
 			} 
 
             PolymerResourcePackUtils.addModAssets(MOD_ID);
-			//ResourcePackBuilder.addData();
-
             PolymerResourcePackUtils.markAsRequired();
 
-		//BlahajDataComponentTypes.register();
+		BlahajDataComponentTypes.register();
 		BlahajBlocks.register();
+		BlahajSoundEvents.init();
 		registerLootTables();
 		registerTrades();
 	}

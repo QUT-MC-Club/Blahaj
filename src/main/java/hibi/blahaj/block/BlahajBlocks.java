@@ -1,24 +1,17 @@
 package hibi.blahaj.block;
 
-import net.fabricmc.fabric.api.blockrenderlayer.v1.*;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.itemgroup.v1.*;
 import net.minecraft.block.*;
-import net.minecraft.client.render.*;
 import net.minecraft.entity.*;
 import net.minecraft.item.*;
 import net.minecraft.loot.LootTable;
 import net.minecraft.text.Text;
 import eu.pb4.polymer.core.api.item.*;
 import hibi.blahaj.Blahaj;
-import eu.pb4.polymer.core.api.block.*;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.registry.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import xyz.nucleoid.packettweaker.PacketContext;
-import net.minecraft.server.MinecraftServer;
 import java.util.*;
 
 import static hibi.blahaj.Blahaj.*;
@@ -47,7 +40,7 @@ public class BlahajBlocks {
 
 	public static final ItemGroup ITEM_GROUP = PolymerItemGroupUtils.builder()
             .displayName(Text.of("Blåhaj"))
-            .icon(Items.COD::getDefaultStack).entries((context, entries) -> {
+            .icon(() -> new ItemStack(BLAHAJ_BLOCK)).entries((context, entries) -> {
                 for (Item item : ITEMS) {
 					entries.add(new ItemStack(item));
 				}

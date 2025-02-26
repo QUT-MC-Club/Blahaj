@@ -19,7 +19,7 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
-public class CuddlyItem extends BlockItem implements PolymerItem {
+public class CuddlyItem extends PolymerBlockItem {
 
 	private final Text tooltip;
 
@@ -46,8 +46,8 @@ public class CuddlyItem extends BlockItem implements PolymerItem {
 			tooltip.add(this.tooltip);
 		}
 
-		//@Nullable Text ownerName = stack.get(BlahajDataComponentTypes.OWNER);
-		Text ownerName = Text.of("Default");
+		@Nullable Text ownerName = stack.get(BlahajDataComponentTypes.OWNER);
+		//Text ownerName = Text.of("Default");
 		if (ownerName != null) {
 			@Nullable Text customName = stack.get(DataComponentTypes.CUSTOM_NAME);
 			if (customName == null) {
@@ -65,18 +65,6 @@ public class CuddlyItem extends BlockItem implements PolymerItem {
 			.add(EntityAttributes.BLOCK_BREAK_SPEED, new EntityAttributeModifier(MINING_SPEED_MODIFIER_ID, -3.0, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), AttributeModifierSlot.MAINHAND)
 			.add(EntityAttributes.ATTACK_DAMAGE, new EntityAttributeModifier(BASE_ATTACK_DAMAGE_MODIFIER_ID, -2.0, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), AttributeModifierSlot.MAINHAND)
 			.build();
-	}
-
-	@Override
-	public Item getPolymerItem(ItemStack itemStack, PacketContext context) {
-		return Items.WHITE_WOOL;
-	}
-
-	@Override
-	public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, PacketContext context) {
-		ItemStack out = PolymerItemUtils.createItemStack(itemStack, tooltipType, context);
-		out.set(DataComponentTypes.ITEM_MODEL, Identifier.ofVanilla("cod"));
-		return out;
 	}
 
 }

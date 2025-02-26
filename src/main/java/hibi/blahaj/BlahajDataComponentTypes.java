@@ -7,6 +7,8 @@ import net.minecraft.util.*;
 
 import java.util.function.*;
 
+import eu.pb4.polymer.core.api.other.PolymerComponent;
+
 public class BlahajDataComponentTypes {
 
 	public static final ComponentType<Text> OWNER = register("owner", (builder) -> builder.codec(TextCodecs.STRINGIFIED_CODEC).packetCodec(TextCodecs.REGISTRY_PACKET_CODEC).cache());
@@ -16,7 +18,7 @@ public class BlahajDataComponentTypes {
 	}
 
 	public static void register() {
-
+		PolymerComponent.registerDataComponent(OWNER);
 	}
 
 }
