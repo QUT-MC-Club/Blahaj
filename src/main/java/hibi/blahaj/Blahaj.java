@@ -1,19 +1,42 @@
 package hibi.blahaj;
 
+import org.slf4j.LoggerFactory;
+
+//import de.tomalbrc.filament.api.FilamentLoader;
+import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
+import eu.pb4.polymer.resourcepack.api.ResourcePackBuilder;
 import hibi.blahaj.block.*;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.loot.v3.*;
 import net.fabricmc.fabric.api.object.builder.v1.trade.*;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.*;
 import net.minecraft.loot.*;
 import net.minecraft.loot.entry.*;
 import net.minecraft.village.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class Blahaj implements ModInitializer {
 
 	public static final String MOD_ID = "blahaj";
+	public static final String COMMON_ID = "polymerized";
+	public static final Logger LOGGER = LoggerFactory.getLogger("Blahaj");
+	public static final boolean DEV_ENV = FabricLoader.getInstance().isDevelopmentEnvironment();
 
 	public void onInitialize() {
+			if (DEV_ENV) {
+				LOGGER.info("==========================================================");
+				LOGGER.info("Development environment detected! Enabling debug output...");
+				LOGGER.info("==========================================================");
+			} 
+
+            PolymerResourcePackUtils.addModAssets(MOD_ID);
+			//ResourcePackBuilder.addData();
+
+            PolymerResourcePackUtils.markAsRequired();
+
 		//BlahajDataComponentTypes.register();
 		BlahajBlocks.register();
 		registerLootTables();

@@ -1,18 +1,24 @@
 package hibi.blahaj.block;
 
 import net.fabricmc.fabric.api.blockrenderlayer.v1.*;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.*;
 import net.minecraft.block.*;
 import net.minecraft.client.render.*;
 import net.minecraft.entity.*;
 import net.minecraft.item.*;
+import net.minecraft.loot.LootTable;
 import net.minecraft.text.Text;
 import eu.pb4.polymer.core.api.item.*;
+import hibi.blahaj.Blahaj;
 import eu.pb4.polymer.core.api.block.*;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.registry.*;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import xyz.nucleoid.packettweaker.PacketContext;
+import net.minecraft.server.MinecraftServer;
 import java.util.*;
 
 import static hibi.blahaj.Blahaj.*;
@@ -60,6 +66,7 @@ public class BlahajBlocks {
 			registerCuddlyBlockAndItem(id, "block.blahaj.blue_shark.tooltip");
 		}
 		PolymerItemGroupUtils.registerPolymerItemGroup(Identifier.of(MOD_ID, "item_group"), ITEM_GROUP);
+
 	}
 
 	public static Block registerCuddlyBlockAndItem(Identifier id, String tooltip) {
@@ -71,6 +78,28 @@ public class BlahajBlocks {
 
 		BLOCKS.add(block);
 		ITEMS.add(item);
+		if (Blahaj.DEV_ENV) {
+            ServerLifecycleEvents.SERVER_STARTED.register((BlahajBlocks::validateLootTables));
+            ServerLifecycleEvents.END_DATA_PACK_RELOAD.register(((server, resourceManager, success) -> {
+                validateLootTables(server);
+            }));
+		}
 		return block;
 	}
+
+	    private static void validateLootTables(MinecraftServer server) {
+        for (var block : BLOCKS) {
+            if (block.getLootTableKey().isPresent()) {
+                var lt = server.getReloadableRegistries().getLootTable(block.getLootTableKey().get());
+                if (lt == LootTable.EMPTY) {
+                    Blahaj.LOGGER.warn("Missing loot table? " + block.getLootTableKey().get().getValue());
+                }
+            }
+            if (block instanceof BlockEntityProvider provider) {
+                var be = provider.createBlockEntity(BlockPos.ORIGIN, block.getDefaultState());
+                assert be == null || be.getType().supports(block.getDefaultState());
+            }
+
+        }
+    }
 }
