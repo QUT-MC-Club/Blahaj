@@ -7,6 +7,7 @@ import net.minecraft.component.type.*;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
+import eu.pb4.factorytools.api.item.FactoryBlockItem;
 import eu.pb4.polymer.core.api.item.*;
 import net.minecraft.item.tooltip.*;
 import net.minecraft.nbt.NbtElement;
@@ -19,7 +20,7 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
-public class CuddlyItem extends PolymerBlockItem {
+public class CuddlyItem extends FactoryBlockItem {
 
 	private final Text tooltip;
 
