@@ -24,8 +24,8 @@ public class CuddlyItem extends FactoryBlockItem {
 
 	private final Text tooltip;
 
-	public <T extends Block & PolymerBlock> CuddlyItem(T block, Settings settings, String tooltip) {
-		super(block, settings);
+	public <T extends Block & PolymerBlock> CuddlyItem(Block block, Settings settings, String tooltip) {
+		super((T) block, settings);
 		this.tooltip = tooltip == null ? null : Text.translatable(tooltip).formatted(Formatting.GRAY);
 		
 	}

@@ -13,6 +13,7 @@ import eu.pb4.polymer.virtualentity.api.ElementHolder;
 import eu.pb4.polymer.virtualentity.api.elements.ItemDisplayElement;
 import hibi.blahaj.sound.*;
 import net.minecraft.block.*;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.*;
 import net.minecraft.entity.projectile.*;
 import net.minecraft.item.*;
@@ -30,6 +31,7 @@ import xyz.nucleoid.packettweaker.PacketContext;
 
 public class CuddlyBlock extends HorizontalFacingBlock implements FactoryBlock {
 
+	//public static final CuddlyBlock CUDDLY_BLOCK = register("cuddly_block", new CuddlyBlock(CuddlyBlock.Settings.create()));
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0);
 	public static final MapCodec<CuddlyBlock> CODEC = createCodec(CuddlyBlock::new);
 
@@ -53,6 +55,7 @@ public class CuddlyBlock extends HorizontalFacingBlock implements FactoryBlock {
 		builder.add(FACING);
 	}
 
+
 	@Override
 	protected void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
 		world.playSound(null, hit.getBlockPos(), BlahajSoundEvents.BLOCK_CUDDLY_ITEM_HIT, SoundCategory.BLOCKS, 0.5f, 1);
@@ -64,11 +67,26 @@ public class CuddlyBlock extends HorizontalFacingBlock implements FactoryBlock {
 		world.playSound(null, pos, BlahajSoundEvents.getRandomSqueak(world.getRandom()), SoundCategory.BLOCKS, 0.5f, 1);
 		return ActionResult.SUCCESS;
 	}
+	/*
+	@Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+		System.out.println(entity.getY() % 1);
+        if (world instanceof ServerWorld serverWorld && (entity.getY() % 10) == 0) {
+			world.playSound(null, pos, BlahajSoundEvents.getRandomSqueak(world.getRandom()), SoundCategory.BLOCKS, 0.5f, 1);
+		}
+	}
+	*/
+
 
 	@Override
 	public BlockState getPolymerBlockState(BlockState state, PacketContext context) {
 		return Blocks.BARRIER.getDefaultState();
 	}
+	
+	@Override
+	public BlockState getPolymerBreakEventBlockState(BlockState state, PacketContext context) {
+        return Blocks.WHITE_WOOL.getDefaultState();
+    }
 
 	@Override
     public @Nullable ElementHolder createElementHolder(ServerWorld world, BlockPos pos, BlockState initialBlockState) {
