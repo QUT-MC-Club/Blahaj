@@ -3,6 +3,7 @@ package hibi.blahaj.block;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.*;
 import net.minecraft.item.*;
 import net.minecraft.loot.LootTable;
@@ -18,7 +19,7 @@ import java.util.*;
 import static hibi.blahaj.Blahaj.*;
 
 public class BlahajBlocks {
-	public static final CuddlyBlock CUDDLY_BLOCK = register(MOD_ID, new CuddlyBlock(CuddlyBlock.Settings.create()));
+
 	public static final Identifier GRAY_SHARK_ID = Identifier.of(MOD_ID, "gray_shark");
 	public static final Identifier BLAHAJ_ID = Identifier.of(MOD_ID, "blue_shark");
 	public static final Identifier BLAVINGAD_ID = Identifier.of(MOD_ID, "blue_whale");
