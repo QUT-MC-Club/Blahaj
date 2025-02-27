@@ -1,6 +1,7 @@
 package hibi.blahaj.block;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
 import net.minecraft.item.*;
@@ -17,7 +18,7 @@ import java.util.*;
 import static hibi.blahaj.Blahaj.*;
 
 public class BlahajBlocks {
-	
+	public static final CuddlyBlock CUDDLY_BLOCK = register(MOD_ID, new CuddlyBlock(CuddlyBlock.Settings.create()));
 	public static final Identifier GRAY_SHARK_ID = Identifier.of(MOD_ID, "gray_shark");
 	public static final Identifier BLAHAJ_ID = Identifier.of(MOD_ID, "blue_shark");
 	public static final Identifier BLAVINGAD_ID = Identifier.of(MOD_ID, "blue_whale");
@@ -51,7 +52,7 @@ public class BlahajBlocks {
 		GRAY_SHARK_BLOCK = registerCuddlyBlockAndItem(GRAY_SHARK_ID, "block.blahaj.gray_shark.tooltip");
 		BLAHAJ_BLOCK = registerCuddlyBlockAndItem(BLAHAJ_ID, "block.blahaj.blue_shark.tooltip");
 		BLAVINGAD_BLOCK = registerCuddlyBlockAndItem(BLAVINGAD_ID, "block.blahaj.blue_whale.tooltip");
-		BREAD_BLOCK = registerCuddlyBlockAndItem(BREAD_ID, null);
+		BREAD_BLOCK = registerCuddlyBlockAndItem(BREAD_ID, "block.blahaj.bread.tooltop");
 		BROWN_BEAR_BLOCK = registerCuddlyBlockAndItem(BROWN_BEAR_ID, "block.blahaj.brown_bear.tooltip");
 
 		for (String name : PRIDE_NAMES) {
@@ -68,31 +69,9 @@ public class BlahajBlocks {
 		RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, id);
 		Block block = Registry.register(Registries.BLOCK, id, new CuddlyBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).registryKey(blockKey)));
 		Item item = Registry.register(Registries.ITEM, id, new CuddlyItem(block, new Item.Settings().registryKey(itemKey).useBlockPrefixedTranslationKey().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()).equipmentSlot((entity, stack) -> EquipmentSlot.HEAD), tooltip));
-
+		FabricBlockEntityTypeBuilder.create(CuddlyBlockEntity::new, block).build();
 		BLOCKS.add(block);
 		ITEMS.add(item);
-		if (Blahaj.DEV_ENV) {
-            ServerLifecycleEvents.SERVER_STARTED.register((BlahajBlocks::validateLootTables));
-            ServerLifecycleEvents.END_DATA_PACK_RELOAD.register(((server, resourceManager, success) -> {
-                validateLootTables(server);
-            }));
-		}
 		return block;
 	}
-
-	    private static void validateLootTables(MinecraftServer server) {
-        for (var block : BLOCKS) {
-            if (block.getLootTableKey().isPresent()) {
-                var lt = server.getReloadableRegistries().getLootTable(block.getLootTableKey().get());
-                if (lt == LootTable.EMPTY) {
-                    Blahaj.LOGGER.warn("Missing loot table? " + block.getLootTableKey().get().getValue());
-                }
-            }
-            if (block instanceof BlockEntityProvider provider) {
-                var be = provider.createBlockEntity(BlockPos.ORIGIN, block.getDefaultState());
-                assert be == null || be.getType().supports(block.getDefaultState());
-            }
-
-        }
-    }
 }

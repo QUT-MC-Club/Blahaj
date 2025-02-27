@@ -31,7 +31,6 @@ import xyz.nucleoid.packettweaker.PacketContext;
 
 public class CuddlyBlock extends HorizontalFacingBlock implements FactoryBlock {
 
-	//public static final CuddlyBlock CUDDLY_BLOCK = register("cuddly_block", new CuddlyBlock(CuddlyBlock.Settings.create()));
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0);
 	public static final MapCodec<CuddlyBlock> CODEC = createCodec(CuddlyBlock::new);
 

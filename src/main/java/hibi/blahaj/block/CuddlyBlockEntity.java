@@ -9,8 +9,6 @@ import hibi.blahaj.block.*;
 
 public class CuddlyBlockEntity extends BlockEntity {
 
-    
-
     public CuddlyBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         PolymerBlockUtils.registerBlockEntity(type);
