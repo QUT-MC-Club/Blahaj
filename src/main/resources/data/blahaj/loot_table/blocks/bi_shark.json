@@ -10,9 +10,18 @@
           "name": "blahaj:bi_shark"
         }
       ],
-      "conditions": [
+       "conditions": [
+         {
+           "condition": "minecraft:survives_explosion"
+         }
+       ],
+       "functions": [
         {
-          "condition": "minecraft:survives_explosion"
+          "source": "block_entity",
+          "include": [
+            "blahaj:owner"
+          ],
+          "function": "minecraft:copy_components"
         }
       ]
     }

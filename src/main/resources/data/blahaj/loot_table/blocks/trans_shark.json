@@ -16,5 +16,15 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": [
+    {
+      "source": "block_entity",
+      "include": [
+        "blahaj:owner"
+      ],
+      "function": "minecraft:copy_components"
 }
+]
+}
+
