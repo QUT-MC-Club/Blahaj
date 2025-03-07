@@ -5,6 +5,7 @@
 - When you craft or rename a plushie, it'll have your username attached to it.
 - You can place the plushies down!
 - This mod only needs to be installed on the server.
+- Requires [Polymer](https://github.com/Patbox/polymer)
 
 ## Content
 
