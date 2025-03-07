@@ -70,7 +70,7 @@ public class BlahajBlocks {
 		RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, id);
 		Block block = Registry.register(Registries.BLOCK, id, new CuddlyBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).registryKey(blockKey)));
 		Item item = Registry.register(Registries.ITEM, id, new CuddlyItem(block, new Item.Settings().registryKey(itemKey).useBlockPrefixedTranslationKey().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()).equipmentSlot((entity, stack) -> EquipmentSlot.HEAD), tooltip));
-		FabricBlockEntityTypeBuilder.create(CuddlyBlockEntity::new, block).build();
+		//FabricBlockEntityTypeBuilder.create(CuddlyBlockEntity::new, block).build();
 		BLOCKS.add(block);
 		ITEMS.add(item);
 		return block;

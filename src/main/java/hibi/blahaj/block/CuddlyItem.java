@@ -8,6 +8,7 @@ import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import eu.pb4.factorytools.api.item.FactoryBlockItem;
+import eu.pb4.polymer.core.api.item.PolymerItemUtils;
 import eu.pb4.polymer.core.api.item.*;
 import net.minecraft.item.tooltip.*;
 import net.minecraft.nbt.NbtElement;
@@ -27,7 +28,7 @@ public class CuddlyItem extends FactoryBlockItem {
 	public <T extends Block & PolymerBlock> CuddlyItem(Block block, Settings settings, String tooltip) {
 		super((T) block, settings);
 		this.tooltip = tooltip == null ? null : Text.translatable(tooltip).formatted(Formatting.GRAY);
-		
+		PolymerItemUtils.enableStonecutterFix();
 	}
 
 	@Override
