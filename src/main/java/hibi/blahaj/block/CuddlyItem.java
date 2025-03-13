@@ -41,7 +41,10 @@ public class CuddlyItem extends FactoryBlockItem implements Trinket {
 	@Override
 	public void onCraftByPlayer(ItemStack stack, World world, PlayerEntity player) {
 		super.onCraftByPlayer(stack, world, player);
-
+		if (Blahaj.DEV_ENV) {
+			var component = TrinketsApi.getTrinketComponent(player).orElse(null).getInventory().get("head").get("hat").getStack(0);
+            Blahaj.LOGGER.info("Player slot component: " + component.toString());
+        }
 		if (player != null) { // compensate for auto-crafter mods
 			stack.set(BlahajDataComponentTypes.OWNER, player.getName());
 		}
