@@ -53,7 +53,7 @@ public class BlahajBlocks {
 		GRAY_SHARK_BLOCK = registerCuddlyBlockAndItem(GRAY_SHARK_ID, "block.blahaj.gray_shark.tooltip");
 		BLAHAJ_BLOCK = registerCuddlyBlockAndItem(BLAHAJ_ID, "block.blahaj.blue_shark.tooltip");
 		BLAVINGAD_BLOCK = registerCuddlyBlockAndItem(BLAVINGAD_ID, "block.blahaj.blue_whale.tooltip");
-		BREAD_BLOCK = registerCuddlyBlockAndItem(BREAD_ID, "block.blahaj.bread.tooltop");
+		BREAD_BLOCK = registerCuddlyBlockAndItem(BREAD_ID, "block.blahaj.bread.tooltip");
 		BROWN_BEAR_BLOCK = registerCuddlyBlockAndItem(BROWN_BEAR_ID, "block.blahaj.brown_bear.tooltip");
 
 		for (String name : PRIDE_NAMES) {
