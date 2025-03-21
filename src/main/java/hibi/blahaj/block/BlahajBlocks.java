@@ -1,20 +1,16 @@
 package hibi.blahaj.block;
 
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.*;
 import net.minecraft.item.*;
-import net.minecraft.loot.LootTable;
 import net.minecraft.text.Text;
 import eu.pb4.polymer.core.api.item.*;
 import hibi.blahaj.Blahaj;
 import net.minecraft.registry.*;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
 import java.util.*;
+
+import dev.emi.trinkets.api.TrinketsApi;
 
 import static hibi.blahaj.Blahaj.*;
 
@@ -33,20 +29,20 @@ public class BlahajBlocks {
 	public static Block BROWN_BEAR_BLOCK;
 
 	public static final List<String> PRIDE_NAMES = List.of(
-		"ace", "agender", "aro", "aroace", "bi", "demiboy", "demigirl",
-		"demi_r", "demi_s", "enby", "gay", "genderfluid", "genderqueer", "greyrose",
-		"grey_r", "grey_s", "intersex", "lesbian", "pan", "poly", "pride", "trans");
+			"ace", "agender", "aro", "aroace", "bi", "demiboy", "demigirl",
+			"demi_r", "demi_s", "enby", "gay", "genderfluid", "genderqueer", "greyrose",
+			"grey_r", "grey_s", "intersex", "lesbian", "pan", "poly", "pride", "trans");
 
 	public static List<Block> BLOCKS = new ArrayList<>();
 	public static List<Item> ITEMS = new ArrayList<>();
 
 	public static final ItemGroup ITEM_GROUP = PolymerItemGroupUtils.builder()
-            .displayName(Text.of("Blåhaj"))
-            .icon(() -> new ItemStack(BLAHAJ_BLOCK)).entries((context, entries) -> {
-                for (Item item : ITEMS) {
+			.displayName(Text.of("Blåhaj"))
+			.icon(() -> new ItemStack(BLAHAJ_BLOCK)).entries((context, entries) -> {
+				for (Item item : ITEMS) {
 					entries.add(new ItemStack(item));
 				}
-            }).build();
+			}).build();
 
 	public static void register() {
 
@@ -65,14 +61,42 @@ public class BlahajBlocks {
 	}
 
 	public static Block registerCuddlyBlockAndItem(Identifier id, String tooltip) {
-		
+
 		RegistryKey<Block> blockKey = RegistryKey.of(RegistryKeys.BLOCK, id);
 		RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, id);
-		Block block = Registry.register(Registries.BLOCK, id, new CuddlyBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).registryKey(blockKey)));
-		Item item = Registry.register(Registries.ITEM, id, new CuddlyItem(block, new Item.Settings().registryKey(itemKey).useBlockPrefixedTranslationKey().maxCount(1).attributeModifiers(CuddlyItem.createAttributeModifiers()).equipmentSlot((entity, stack) -> EquipmentSlot.HEAD), tooltip));
-		//FabricBlockEntityTypeBuilder.create(CuddlyBlockEntity::new, block).build();
+		Block block = Registry.register(Registries.BLOCK, id,
+				new CuddlyBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL).registryKey(blockKey)));
+		try {
+			Class.forName("dev.emi.trinkets.api.TrinketsApi", true, TrinketsApi.class.getClassLoader());
+			//Blahaj.LOGGER.info("Trinkets is installed! Enabling support...");
+			Item item = Registry.register(Registries.ITEM, id,
+					new CuddlyItemTrinket(block,
+							new Item.Settings().registryKey(itemKey).useBlockPrefixedTranslationKey().maxCount(1)
+									.attributeModifiers(CuddlyItem.createAttributeModifiers())
+									.equipmentSlot((entity, stack) -> EquipmentSlot.HEAD),
+							tooltip));
+			ITEMS.add(item);
+		} catch (NoClassDefFoundError e) {
+			Item item = registerRegularCuddlyItem(block, itemKey, id, tooltip);
+			ITEMS.add(item);
+		} catch (ClassNotFoundException e) {
+			Item item = registerRegularCuddlyItem(block, itemKey, id, tooltip);
+			ITEMS.add(item);
+		}
+		// FabricBlockEntityTypeBuilder.create(CuddlyBlockEntity::new, block).build();
 		BLOCKS.add(block);
-		ITEMS.add(item);
 		return block;
+	}
+
+	private static Item registerRegularCuddlyItem(Block block, RegistryKey<Item> itemKey, Identifier id,
+			String tooltip) {
+		//Blahaj.LOGGER.warn("Trinkets is not installed! Registering items without Trinket support...");
+		Item item = Registry.register(Registries.ITEM, id,
+				new CuddlyItem(block,
+						new Item.Settings().registryKey(itemKey).useBlockPrefixedTranslationKey().maxCount(1)
+								.attributeModifiers(CuddlyItem.createAttributeModifiers())
+								.equipmentSlot((entity, stack) -> EquipmentSlot.HEAD),
+						tooltip));
+		return item;
 	}
 }

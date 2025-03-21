@@ -6,7 +6,10 @@
   "mixins": [],
   "client": [],
   "server": [
-    "ArmorHeadSlotMixin"
+    "ArmorHeadSlotMixin",
+    "PlayerManagerMixin",
+    "ServerPlayerEntityMixin",
+    "LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

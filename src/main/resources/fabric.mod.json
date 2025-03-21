@@ -8,7 +8,8 @@
     "hibi",
     "infoplayerstart",
     "musicalskele",
-    "DaFuqs"
+    "DaFuqs",
+    "CCF_100"
   ],
   "contact": {
     "homepage": "https://github.com/DaFuqs/Blahaj",
@@ -28,7 +29,12 @@
   "depends": {
     "minecraft": ">=${minecraft_version}",
     "fabricloader": "*",
-    "fabric-api": "*"
+    "fabric-api": "*",
+    "polymer-core": "*"
+  },
+  "recommends": {
+    "polytrinkets": "*",
+    "polydex": "*"
   }
   
 }

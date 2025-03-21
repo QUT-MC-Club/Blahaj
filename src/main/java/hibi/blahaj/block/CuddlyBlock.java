@@ -33,7 +33,7 @@ public class CuddlyBlock extends HorizontalFacingBlock implements FactoryBlock {
 
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 8.0, 12.0);
 	public static final MapCodec<CuddlyBlock> CODEC = createCodec(CuddlyBlock::new);
-
+	
 	public CuddlyBlock(Settings settings) {
 		super(settings.nonOpaque());
 		this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH));
