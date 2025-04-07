@@ -20,18 +20,12 @@
   "entrypoints": {
     "main": [
       "hibi.blahaj.Blahaj"
-    ],
-    "client": [
-      "hibi.blahaj.BlahajClient"
     ]
   },
-  "mixins": [
-    "blahaj.mixins.json"
-  ],
   "depends": {
     "minecraft": ">=${minecraft_version}",
     "fabricloader": "*",
     "fabric-api": "*"
   }
-  
+
 }

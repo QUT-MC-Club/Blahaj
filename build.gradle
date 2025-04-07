@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.9-SNAPSHOT'
+	id 'fabric-loom' version '1.10-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -12,7 +12,10 @@ base {
 
 repositories {
     maven { url 'https://maven.nucleoid.xyz' }
-	maven { url 'https://maven.tomalbrc.de' }
+	maven {
+		name = "Modrinth"
+		url = "https://api.modrinth.com/maven"
+	}
 }
 
 dependencies {
@@ -26,7 +29,6 @@ dependencies {
 	modImplementation include("eu.pb4:polymer-resource-pack-extras:[${project.polymer_version}]")
 	modImplementation ("eu.pb4:polymer-autohost:${project.polymer_version}")
 	modImplementation include("eu.pb4:factorytools:[${project.factorytools_version}]")
-	
 }
 
 processResources {
@@ -67,6 +69,6 @@ publishing {
 	}
 
 	repositories {
-	
+
 	}
 }

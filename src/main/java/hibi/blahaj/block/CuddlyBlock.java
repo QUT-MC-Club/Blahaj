@@ -81,7 +81,7 @@ public class CuddlyBlock extends HorizontalFacingBlock implements FactoryBlock {
 	public BlockState getPolymerBlockState(BlockState state, PacketContext context) {
 		return Blocks.BARRIER.getDefaultState();
 	}
-	
+
 	@Override
 	public BlockState getPolymerBreakEventBlockState(BlockState state, PacketContext context) {
         return Blocks.WHITE_WOOL.getDefaultState();
@@ -97,7 +97,7 @@ public class CuddlyBlock extends HorizontalFacingBlock implements FactoryBlock {
 		    public Model(BlockState state) {
             this.main = ItemDisplayElementUtil.createSimple(state.getBlock().asItem());
             this.main.setDisplaySize(1, 1);
-			this.main.setModelTransformation(ModelTransformationMode.NONE);
+			this.main.setItemDisplayContext(ItemDisplayContext.NONE);
             var yaw = state.get(FACING).getPositiveHorizontalDegrees();
             this.main.setYaw(yaw);
             this.addElement(this.main);

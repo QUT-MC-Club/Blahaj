@@ -20,6 +20,7 @@ import eu.pb4.polymer.core.api.block.PolymerBlock;
 import org.jetbrains.annotations.*;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class CuddlyItem extends FactoryBlockItem {
 
@@ -32,8 +33,8 @@ public class CuddlyItem extends FactoryBlockItem {
 	}
 
 	@Override
-	public void onCraftByPlayer(ItemStack stack, World world, PlayerEntity player) {
-		super.onCraftByPlayer(stack, world, player);
+	public void onCraftByPlayer(ItemStack stack, PlayerEntity player) {
+		super.onCraftByPlayer(stack, player);
 
 		if (player != null) { // compensate for auto-crafter mods
 			stack.set(BlahajDataComponentTypes.OWNER, player.getName());
@@ -41,11 +42,11 @@ public class CuddlyItem extends FactoryBlockItem {
 	}
 
 	@Override
-	public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-		super.appendTooltip(stack, context, tooltip, type);
+	public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
+		super.appendTooltip(stack, context, displayComponent, textConsumer, type);
 
 		if (this.tooltip != null) {
-			tooltip.add(this.tooltip);
+			textConsumer.accept(this.tooltip);
 		}
 
 		@Nullable Text ownerName = stack.get(BlahajDataComponentTypes.OWNER);
@@ -53,9 +54,9 @@ public class CuddlyItem extends FactoryBlockItem {
 		if (ownerName != null) {
 			@Nullable Text customName = stack.get(DataComponentTypes.CUSTOM_NAME);
 			if (customName == null) {
-				tooltip.add(Text.translatable("tooltip.blahaj.owner.craft", ownerName).formatted(Formatting.GRAY));
+				textConsumer.accept(Text.translatable("tooltip.blahaj.owner.craft", ownerName).formatted(Formatting.GRAY));
 			} else {
-				tooltip.add(Text.translatable("tooltip.blahaj.owner.rename", customName, ownerName).formatted(Formatting.GRAY));
+				textConsumer.accept(Text.translatable("tooltip.blahaj.owner.rename", customName, ownerName).formatted(Formatting.GRAY));
 			}
 		}
 	}
